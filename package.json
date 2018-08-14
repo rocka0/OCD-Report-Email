@@ -1,0 +1,23 @@
+{
+  "name": "ocd-reports",
+  "version": "1.0.0",
+  "description": "The report part of the OCD app",
+  "main": "index.js",
+  "dependencies": {
+    "semantic-ui": "^2.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/rocka0/OCD-report-email.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/rocka0/OCD-report-email/issues"
+  },
+  "homepage": "https://gitlab.com/rocka0/OCD-report-email#README"
+}
