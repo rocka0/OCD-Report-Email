@@ -216,40 +216,162 @@
 
 <style>
 
-        .graph .labels.x-labels {
-        text-anchor: middle;
-        }
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "fira-sans-2", Verdana, sans-serif;
+}
 
-        .graph .labels.y-labels {
-        text-anchor: end;
-        }
+#q-graph {
+  display: block;
+  /* fixes layout wonkiness in FF1.5 */
+  position: relative;
+  width: 600px;
+  height: 300px;
+  margin: 1.1em 0 0;
+  padding: 0;
+  background: transparent;
+  font-size: 11px;
+}
 
-        .graph {
-        height: 500px;
-        width: 800px;
-        }
+#q-graph caption {
+  caption-side: top;
+  width: 600px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  top: -40px;
+  position: relative;
+  z-index: 10;
+  font-weight: bold;
+}
 
-        .graph .grid {
-        stroke: #ccc;
-        stroke-dasharray: 0;
-        stroke-width: 1;
-        }
+#q-graph tr, #q-graph th, #q-graph td {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
-        .labels {
-        font-size: 13px;
-        }
+#q-graph td {
+  transition: all .3s ease;
+}
+#q-graph td:hover {
+  background-color: #4d4d4d;
+  opacity: .9;
+  color: white;
+}
 
-        .label-title {
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 12px;
-        fill: black;
-        }
+#q-graph thead tr {
+  left: 100%;
+  top: 50%;
+  bottom: auto;
+  margin: -2.5em 0 0 5em;
+}
 
-        .data {
-        fill: red;
-        stroke-width: 1;
-        }
+#q-graph thead th {
+  width: 7.5em;
+  height: auto;
+  padding: 0.5em 1em;
+}
+
+#q-graph thead th.sent {
+  top: 0;
+  left: 0;
+  line-height: 2;
+}
+
+#q-graph thead th.paid {
+  top: 2.75em;
+  line-height: 2;
+  left: 0;
+}
+
+#q-graph tbody tr {
+  height: 296px;
+  padding-top: 2px;
+  border-right: 1px dotted #C4C4C4;
+  color: #AAA;
+}
+
+#q-graph #q1 {
+  left: 0;
+}
+
+#q-graph #q2 {
+  left: 150px;
+}
+
+#q-graph #q3 {
+  left: 300px;
+}
+
+#q-graph #q4 {
+  left: 450px;
+  border-right: none;
+}
+
+#q-graph tbody th {
+  bottom: -1.75em;
+  vertical-align: top;
+  font-weight: normal;
+  color: #333;
+}
+
+#q-graph .bar {
+  width: 60px;
+  border: 1px solid;
+  border-bottom: none;
+  color: #000;
+}
+
+#q-graph .bar p {
+  margin: 5px 0 0;
+  padding: 0;
+  opacity: .4;
+}
+
+#q-graph .sent {
+  left: 13px;
+  background-color: #95ca03;
+  border-color: transparent;
+}
+
+#q-graph .paid {
+  left: 77px;
+  background-color: #7fdbff;
+  border-color: transparent;
+}
+
+#ticks {
+  position: relative;
+  top: -300px;
+  left: 2px;
+  width: 596px;
+  height: 300px;
+  z-index: 1;
+  margin-bottom: -300px;
+  font-size: 10px;
+  font-family: "fira-sans-2", Verdana, sans-serif;
+}
+
+#ticks .tick {
+  position: relative;
+  border-bottom: 1px dotted #C4C4C4;
+  width: 600px;
+}
+
+#ticks .tick p {
+  position: absolute;
+  left: -5em;
+  top: -0.8em;
+  margin: 0 0 0 0.5em;
+}
+
 
     </style>
 
@@ -342,57 +464,83 @@
                                                 <td height="25" class="em_fix_height">&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td mc:edit="PRODUCT1_Title" class="em_black" align="center" valign="top" style=";font-family:Arial, sans-serif;font-size:18px;line-height:24px;color:#333333;">Compulsion-Emotions Relation</td>
+                                                <td mc:edit="PRODUCT1_Title" class="em_black" align="center" valign="top" style=";font-family:Arial, sans-serif;font-size:18px;line-height:24px;color:#333333;">Compulsion Relation</td>
                                             </tr>
                                             <tr>
                                                 <td height="8" style="line-height:1px;font-size:1px;">&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td mc:edit="PRODUCT1_Description" class="em_grey" align="center" valign="top" style=";font-family:Arial, sans-serif;font-size:13px;line-height:20px;color:#808080;">A graph that relates the number of compulsions your patient has experienced that week to the emotions felt during the week.
+                                                <td mc:edit="PRODUCT1_Description" class="em_grey" align="center" valign="top" style=";font-family:Arial, sans-serif;font-size:13px;line-height:20px;color:#808080;">A graph that relates the number of compulsions your patient has experienced during the week.
                                                 <br />
                                                 <br /> 
-                                                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
-                                                    <title id="title">A line chart showing some information</title>
-                                                  <g class="grid x-grid" id="xGrid">
-                                                    <line x1="90" x2="90" y1="5" y2="371"></line>
-                                                  </g>
-                                                  <g class="grid y-grid" id="yGrid">
-                                                    <line x1="90" x2="705" y1="370" y2="370"></line>
-                                                  </g>
-                                                    <g class="labels x-labels">
-                                                    <text x="100" y="400">2008</text>
-                                                    <text x="246" y="400">2009</text>
-                                                    <text x="392" y="400">2010</text>
-                                                    <text x="538" y="400">2011</text>
-                                                    <text x="684" y="400">2012</text>
-                                                    <text x="400" y="440" class="label-title">Year</text>
-                                                  </g>
-                                                  <g class="labels y-labels">
-                                                    <text x="80" y="15">15</text>
-                                                    <text x="80" y="131">10</text>
-                                                    <text x="80" y="248">5</text>
-                                                    <text x="80" y="373">0</text>
-                                                    <text x="50" y="200" class="label-title">Price</text>
-                                                  </g>
-                                                  <g class="data" data-setname="Our first data set">
-                                                    <circle cx="90" cy="280" data-value="7.2" r="4"></circle>
-                                                    <circle cx="240" cy="161" data-value="8.1" r="4"></circle>
-                                                    <circle cx="388" cy="100" data-value="7.7" r="4"></circle>
-                                                    <circle cx="531" cy="305" data-value="6.8" r="4"></circle>
-                                                    <circle cx="677" cy="197" data-value="6.7" r="4"></circle>
-                                                  </g>
-                                                     <polyline
-                                                       fill="none"
-                                                       stroke="#0074d9"
-                                                       stroke-width="3"
-                                                       points="
-                                                         90,280
-                                                         240,161
-                                                         388,100
-                                                         531,305
-                                                         677,197
-                                                         "/>
-                                                  </svg>
+                                                <br />
+                                                <br />
+                                                <table id="q-graph">
+                                                        <caption>Quarterly Results</caption>
+                                                        <thead>
+                                                          <tr>
+                                                            <th></th>
+                                                            <th class="sent">Invoiced</th>
+                                                            <th class="paid">Collected</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr class="qtr" id="q1">
+                                                            <th scope="row">Q1</th>
+                                                            <td class="sent bar" style="height: 111px;">
+                                                              <p>$18,450.00</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 99px;">
+                                                              <p>$16,500.00</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q2">
+                                                            <th scope="row">Q2</th>
+                                                            <td class="sent bar" style="height: 206px;">
+                                                              <p>$34,340.72</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 194px;">
+                                                              <p>$32,340.72</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q3">
+                                                            <th scope="row">Q3</th>
+                                                            <td class="sent bar" style="height: 259px;">
+                                                              <p>$43,145.52</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 193px;">
+                                                              <p>$32,225.52</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q4">
+                                                            <th scope="row">Q4</th>
+                                                            <td class="sent bar" style="height: 110px;">
+                                                              <p>$18,415.96</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 195px;">
+                                                              <p>$32,425.00</p>
+                                                            </td>
+                                                          </tr>  
+                                                        </tbody>
+                                                      </table>
+                                                      
+                                                      <div id="ticks">
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$50,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$40,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$30,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$20,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$10,000</p>
+                                                        </div>
+                                                      </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -431,48 +579,83 @@
                                                 <td mc:edit="PRODUCT2_Description" class="em_grey" align="center" valign="top" style=";font-family:Arial, sans-serif;font-size:13px;line-height:20px;color:#808080;">A graph mapping the number of OCD attacks your patient has suffered from during this week.
                                                 <br />
                                                 <br />
-                                                <svg version="1.2" style=";" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
-                                                    <title id="title">A line chart showing some information</title>
-                                                  <g class="grid x-grid" id="xGrid">
-                                                    <line x1="90" x2="90" y1="5" y2="371"></line>
-                                                  </g>
-                                                  <g class="grid y-grid" id="yGrid">
-                                                    <line x1="90" x2="705" y1="370" y2="370"></line>
-                                                  </g>
-                                                    <g class="labels x-labels">
-                                                    <text x="100" y="400">2008</text>
-                                                    <text x="246" y="400">2009</text>
-                                                    <text x="392" y="400">2010</text>
-                                                    <text x="538" y="400">2011</text>
-                                                    <text x="684" y="400">2012</text>
-                                                    <text x="400" y="440" class="label-title">Year</text>
-                                                  </g>
-                                                  <g class="labels y-labels">
-                                                    <text x="80" y="15">15</text>
-                                                    <text x="80" y="131">10</text>
-                                                    <text x="80" y="248">5</text>
-                                                    <text x="80" y="373">0</text>
-                                                    <text x="50" y="200" class="label-title">Price</text>
-                                                  </g>
-                                                  <g class="data" data-setname="Our first data set">
-                                                    <circle cx="90" cy="192" data-value="7.2" r="4"></circle>
-                                                    <circle cx="240" cy="141" data-value="8.1" r="4"></circle>
-                                                    <circle cx="388" cy="179" data-value="7.7" r="4"></circle>
-                                                    <circle cx="531" cy="200" data-value="6.8" r="4"></circle>
-                                                    <circle cx="677" cy="104" data-value="6.7" r="4"></circle>
-                                                  </g>
-                                                     <polyline
-                                                       fill="none"
-                                                       stroke="#0074d9"
-                                                       stroke-width="3"
-                                                       points="
-                                                         90,192
-                                                         240,141
-                                                         388,179
-                                                         531,200
-                                                         677,104
-                                                         "/>
-                                                  </svg>
+                                                <br />
+                                                <br />
+                                                <table id="q-graph">
+                                                        <caption>Quarterly Results</caption>
+                                                        <thead>
+                                                          <tr>
+                                                            <th></th>
+                                                            <th class="sent">Invoiced</th>
+                                                            <th class="paid">Collected</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr class="qtr" id="q1">
+                                                            <th scope="row">Q1</th>
+                                                            <td class="sent bar" style="height: 111px;">
+                                                              <p>$18,450.00</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 99px;">
+                                                              <p>$16,500.00</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q2">
+                                                            <th scope="row">Q2</th>
+                                                            <td class="sent bar" style="height: 206px;">
+                                                              <p>$34,340.72</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 194px;">
+                                                              <p>$32,340.72</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q3">
+                                                            <th scope="row">Q3</th>
+                                                            <td class="sent bar" style="height: 259px;">
+                                                              <p>$43,145.52</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 193px;">
+                                                              <p>$32,225.52</p>
+                                                            </td>
+                                                          </tr>
+                                                          <tr class="qtr" id="q4">
+                                                            <th scope="row">Q4</th>
+                                                            <td class="sent bar" style="height: 110px;">
+                                                              <p>$18,415.96</p>
+                                                            </td>
+                                                            <td class="paid bar" style="height: 195px;">
+                                                              <p>$32,425.00</p>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                      
+                                                      <div id="ticks">
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$50,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$40,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$30,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$20,000</p>
+                                                        </div>
+                                                        <div class="tick" style="height: 59px;">
+                                                          <p>$10,000</p>
+                                                        </div>
+                                                      </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="15" style="line-height:1px;font-size:1px;">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td height="40" style="line-height:1px;font-size:1px;" class="em_hide">&nbsp;</td>
+                                            </tr>
+                                        </table>
                                                 </td>
                                             </tr>
                                             <tr>
